@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+
+  <script>
+
+  </script>
+{% endblock %}
+
+
+{% block header %}
+  <h1>{% block title %}PDF Information Retreival System{% endblock %}</h1>
+{% endblock %}
+
+
+{% block config %}
+  <form method="post" enctype="multipart/form-data">
+    <div>
+        <p><a href="upload">Upload Documents</a></p>
+        <p><a href="library">View Library</a></p>
+        <p><a href="query">Run Query</a></p>
+    </div>
+  </form>
+{% endblock %}
+
+
+{% block content %}
+  {{ html|safe }}
+{% endblock %}

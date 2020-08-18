@@ -1,0 +1,7 @@
+Data
+venv
+docs/pdf
+instance
+uploads
+athena/__pycache__
+pdfir/__pycache__
