@@ -14,12 +14,9 @@ def create_app(test_config=None):
         UPLOAD_FOLDER = './uploads',
     )
     
-    # ensure the instance folder exists
-    try:
-        os.makedirs(app.instance_path)
-    except OSError:
-        pass
 
+    os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+    os.makedirs(app.instance_path, exist_ok=True)
 
     from . import db
     db.init_app(app)
