@@ -5,15 +5,14 @@ This project enables information retrieval from PDF document libraries.
 ## Setup
 Instructions are provided for the Anaconda Prompt. Commands should be run from the base directory of the repository.
 
-Set up the virtual environment:
+Install the Anaconda environment:
 ```
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
 
 Run the application:
 ```
+conda activate athena
 set FLASK_APP=athena
 set FLASK_ENV=development
 flask init-db
@@ -45,17 +44,14 @@ Create a `data` folder which contains the MOR pdfs. The repository structure sho
 |	├── file_2.pdf
 ├── pdf2txt.py
 ```
-2. Activate the virtual environment.
+2. Execute the `extract.py` script. The script took approximately 4 minutes to convert a 36MB PDF into a 3MB txt file.
 ```
-venv\Scripts\activate
-```
-3. Execute the `extract.py` script. The script took approximately 4 minutes to convert a 36MB PDF into a 3MB txt file.
-```
+conda activate athena
 python extract.py "data\file_1.pdf" --outfile "data\file_1.txt"
 ```
 
 ## Contributing
 After installing new packages to the venv, save the requirements to `requirements.txt` so that your dependencies are added to the repository.
 ```
-python -m pip freeze > requirements.txt
+conda env export > environment.yml
 ```
