@@ -42,7 +42,7 @@ Create a `data` folder which contains the MOR pdfs. The repository structure sho
 ├── data
 |	├── file_1.pdf
 |	├── file_2.pdf
-├── pdf2txt.py
+├── extract.py
 ```
 2. Execute the `extract.py` script. The script took approximately 4 minutes to convert a 36MB PDF into a 3MB txt file.
 ```
