@@ -12,14 +12,6 @@ venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Create a `data` folder which contains the MOR pdfs. The repository structure should resemble:
-```
-├── data
-|	├── file_1.pdf
-|	├── file_2.pdf
-├── pdf2txt.py
-```
-
 Run the application:
 ```
 set FLASK_APP=athena
@@ -43,9 +35,16 @@ flask run -h localhost -p 3000
 ## Usage
 
 ### Part 1 - Converting PDFs to Text
-The script `pdf2txt.py` (pulled from the [pdfminer.six](https://github.com/pdfminer/pdfminer.six) repository) is used to convert PDFs to text. Execute the following commands from the root of the repository, in the Anaconda prompt.
+Execute the following commands from the root of the repository, in the Anaconda prompt.
 
 1. Create a `Data` folder in this repository, and load the PDFs into that folder.
+Create a `data` folder which contains the MOR pdfs. The repository structure should resemble:
+```
+├── data
+|	├── file_1.pdf
+|	├── file_2.pdf
+├── pdf2txt.py
+```
 2. Activate the virtual environment.
 ```
 venv\Scripts\activate
