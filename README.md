@@ -56,5 +56,5 @@ python extract.py "data\file_1.pdf" --outfile "data\file_1.txt"
 ## Contributing
 After installing new packages to the venv, save the requirements to `requirements.txt` so that your dependencies are added to the repository.
 ```
-python -m pip freeze > requirements.txt
+conda env export > environment.yml
 ```
