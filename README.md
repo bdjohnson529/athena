@@ -44,12 +44,9 @@ Create a `data` folder which contains the MOR pdfs. The repository structure sho
 |	├── file_2.pdf
 ├── pdf2txt.py
 ```
-2. Activate the virtual environment.
+2. Execute the `extract.py` script. The script took approximately 4 minutes to convert a 36MB PDF into a 3MB txt file.
 ```
-venv\Scripts\activate
-```
-3. Execute the `extract.py` script. The script took approximately 4 minutes to convert a 36MB PDF into a 3MB txt file.
-```
+conda activate athena
 python extract.py "data\file_1.pdf" --outfile "data\file_1.txt"
 ```
 
