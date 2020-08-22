@@ -5,14 +5,11 @@
 {% endblock %}
 
 
-{% block config %}
+
+{% block content %}
   <ul>
   	{% for document in library %}
   		<li><a href={{document.filepath}}>{{document.filename}}</a></li>
   	{% endfor %}
-{% endblock %}
-
-
-{% block content %}
-  {{ html|safe }}
+  </ul>
 {% endblock %}

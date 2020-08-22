@@ -22,7 +22,6 @@ Create a `data` folder which contains the MOR pdfs. The repository structure sho
 
 Run the application:
 ```
-venv\Scripts\activate
 set FLASK_APP=athena
 set FLASK_ENV=development
 flask init-db
