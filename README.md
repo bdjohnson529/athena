@@ -5,15 +5,14 @@ This project enables information retrieval from PDF document libraries.
 ## Setup
 Instructions are provided for the Anaconda Prompt. Commands should be run from the base directory of the repository.
 
-Set up the virtual environment:
+Install the Anaconda environment:
 ```
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
+conda env create -f environment.yml
 ```
 
 Run the application:
 ```
+conda activate athena
 set FLASK_APP=athena
 set FLASK_ENV=development
 flask init-db
