@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block imports %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='library.css') }}"/>
+
+  <script>
+    function RedirectToUpload(){
+      window.location.replace('upload')
+    }
+
+    function RedirectToView(){
+      var elem = GetSelectedRow();
+      var file = elem.attr("id");
+
+      // redirect to file view
+      if(file != null){
+        var url = 'uploads/'.concat(file)
+        window.location.replace(url);
+      }
+    }
+
+
+    function RedirectToDelete(){
+      var elem = GetSelectedRow();
+      var file = elem.attr("id");
+
+      // redirect to file view
+      if(file != null){
+        var url = 'delete/'.concat(file)
+        window.location.replace(url);
+      }
+      // redirect to delete API
+    }
+
+    function GetSelectedRow(){
+      return $('table > tbody').find('.table-active');
+    }
+
+
+    $(function() {
+      $('#library').on('click', '.clickable-row', function(event) {
+        if($(this).hasClass('table-active')){
+          $(this).removeClass('table-active'); 
+        } else {
+          $(this).addClass('table-active').siblings().removeClass('table-active');
+        }
+      })
+    });
+
+
+  </script>
+
+{% endblock %}
+
+{% block header %}
+  <h1>{% block title %}Library{% endblock %}</h1>
+{% endblock %}
+
+
+
+{% block content %}
+  <div class="library-viewer">
+    <table class="table table-hover" id="library">
+        <tr>
+          <th>Filename</th>
+          <th>Size (kB)</th>
+        </tr>
+      {% for document in library %}
+        <tr class="clickable-row" id="{{ document.name }}">
+          <td>{{ document.name }}</td>
+          <td>{{ document.size }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div>
+    <button onclick="RedirectToUpload()">Upload</button>
+    <button onclick="RedirectToView()">View</button>
+    <button onclick="RedirectToDelete()">Delete</button>
+  </div>
+{% endblock %}

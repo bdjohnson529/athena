@@ -30,16 +30,17 @@ def record_params(setup_state):
     bp.config = app.config
 
 
-@bp.route('/library', methods=['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
 def index():
     """
     Landing page
     """
     filenames = os.listdir(bp.config['UPLOAD_FOLDER'])
-    library = [{'filename' : x, 'filepath': os.path.join(bp.config['UPLOAD_FOLDER'], x)} for x in filenames]
+    data = [{'name' : x,
+             'size': f"{int(os.path.getsize( os.path.join(bp.config['UPLOAD_FOLDER'], x)) / 1000):,}"
+            } for x in filenames]
 
-    print(library)
-    return render_template('library/index.html', library=library)
+    return render_template('library.html', library=data)
 
 
 
@@ -65,9 +66,22 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(bp.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('library.index', html="File uploaded successfully."))
+            return redirect(url_for('library.index'))
 
-    return render_template('library/upload.html', html="")
+    return render_template('upload.html', html="")
+
+
+
+@bp.route('/delete/<filename>', methods=['GET', 'POST'])
+def delete(filename):
+    """
+    Delete document from library
+    """
+    print(filename)
+
+    os.remove(os.path.join(bp.config['UPLOAD_FOLDER'], filename))
+
+    return redirect(url_for('library.index'))
 
 
 

@@ -22,13 +22,11 @@ def create_app(test_config=None):
     db.init_app(app)
 
 
-    from . import home
-    app.register_blueprint(home.bp)
-    app.add_url_rule('/', endpoint='index')
 
 
     from . import library
     app.register_blueprint(library.bp)
+    app.add_url_rule('/', endpoint='index')
 
 
     return app

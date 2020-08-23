@@ -25,4 +25,4 @@ def record_params(setup_state):
 
 @bp.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('home/index.html')
+    return render_template('home.html')

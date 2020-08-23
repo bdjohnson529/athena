@@ -1,0 +1,11 @@
+.library-viewer{
+	min-height: 25vh;
+	min-width: 25vw;
+	max-height: 75vh;
+	max-width: 75vh;
+}
+
+.library-table td{
+	background-color: green;
+	min-width: 100px;
+}
