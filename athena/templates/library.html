@@ -4,6 +4,23 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='library.css') }}"/>
 
   <script>
+
+    $(function() {
+      $('#library').on('click', '.clickable-row', function(event) {
+        if($(this).hasClass('table-active')){
+          $(this).removeClass('table-active'); 
+        } else {
+          $(this).addClass('table-active').siblings().removeClass('table-active');
+        }
+      })
+    });
+
+
+    function GetSelectedRow(){
+      return $('table > tbody').find('.table-active');
+    }
+
+
     function RedirectToUpload(){
       window.location.replace('upload')
     }
@@ -24,28 +41,12 @@
       var elem = GetSelectedRow();
       var file = elem.attr("id");
 
-      // redirect to file view
+      // redirect to delete API
       if(file != null){
         var url = 'delete/'.concat(file)
         window.location.replace(url);
       }
-      // redirect to delete API
     }
-
-    function GetSelectedRow(){
-      return $('table > tbody').find('.table-active');
-    }
-
-
-    $(function() {
-      $('#library').on('click', '.clickable-row', function(event) {
-        if($(this).hasClass('table-active')){
-          $(this).removeClass('table-active'); 
-        } else {
-          $(this).addClass('table-active').siblings().removeClass('table-active');
-        }
-      })
-    });
 
 
   </script>
