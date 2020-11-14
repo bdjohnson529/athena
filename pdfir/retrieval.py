@@ -25,12 +25,11 @@ def ConstructInvertedIndex(input_file):
             if isinstance(element, LTTextContainer):
                 page_text += element.get_text()
 
-
+                
         # add page to inverted index
         page_no = int(page_layout.pageid)
         VocabularyIndex.index_document(page_no, page_text)
 
-        print("Parsed : ", page_no)
 
     data = VocabularyIndex.get_index()
     return data
@@ -50,7 +49,6 @@ class InvertedIndex:
         tokens = tokenizer.tokenize(document)
         terms = collections.Counter(tokens)
 
-        print(terms)
 
         # add terms to inverted index
         for term, frequency in terms.items():
