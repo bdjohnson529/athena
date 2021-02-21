@@ -48,6 +48,11 @@
       }
     }
 
+    function RedirectToProcess(){
+      // redirect to delete API
+      var url = 'process/'
+      window.location.replace(url);
+    }
 
   </script>
 
@@ -79,5 +84,6 @@
     <button onclick="RedirectToUpload()">Upload</button>
     <button onclick="RedirectToView()">View</button>
     <button onclick="RedirectToDelete()">Delete</button>
+    <button onclick="RedirectToProcess()">Process</button>
   </div>
 {% endblock %}

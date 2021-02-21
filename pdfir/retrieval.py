@@ -50,17 +50,18 @@ class InvertedIndex:
         tokens = tokenizer.tokenize(document)
         terms = collections.Counter(tokens)
 
-        print(terms)
-
         # add terms to inverted index
         for term, frequency in terms.items():
+            print(self.index)
+
             update_dict = { term: {'frequency': frequency,
                                   'postings': [document_id]}
                             if term not in self.index
                             else {'frequency': self.index[term]['frequency'] + frequency,
-                                  'postings': self.index[term]['postings'].append(document_id)}
+                                  'postings': self.index[term]['postings'] + [document_id]}
                             }
-
+            print(update_dict)
+            print("\n")
 
         self.index.update(update_dict)
 

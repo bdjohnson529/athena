@@ -6,9 +6,11 @@ import os
 import sys
 import pandas as pd
 import numpy as np
+from pdfminer.high_level import extract_pages
+from pdfminer.layout import LTTextContainer
 
 sys.path.append('..')
-from pdfir.retrieval import ConstructInvertedIndex
+from pdfir.retrieval import ConstructInvertedIndex, InvertedIndex
 
 
 bp = Blueprint('library', __name__)
@@ -94,22 +96,50 @@ def serve_file(filename):
                                filename)
 
 
-'''
+@bp.route('/process/')
 def parse():
+    files = os.listdir(bp.config['UPLOAD_FOLDER'])
+    filepaths = [bp.config['UPLOAD_FOLDER'] + '/' + x for x in files]
+    d_files = {k: v for k, v in enumerate(filepaths)}
+
+
+    print(d_files)
+
+    VocabularyIndex = InvertedIndex()
+
+    for k, v in d_files.items():
+        # iterate through document apges
+        for page_layout in extract_pages(v):
+
+            # compile all text on page
+            page_text = ""
+            for (count, element) in enumerate(page_layout, 1):
+                if isinstance(element, LTTextContainer):
+                    page_text += element.get_text()
+
+            #print(page_text)
+
+            # add page to inverted index
+            page_no = int(page_layout.pageid)
+            VocabularyIndex.index_document(page_no, page_text)
+
+            print(f"processed {page_no}")
+
+    data = VocabularyIndex.get_index()
+    print(data)
+
+    '''
+    # convert dataframe to list of tuples
+    records = list(df.to_records(index=False))
+    str_records = [str(x) for x in records]
+    insert_vals = ",".join(str_records)
+
     # store inverted index as dataframe
     data = ConstructInvertedIndex(file)
     df = pd.DataFrame.from_dict(data).T \
                 .reset_index().rename(columns={'index': 'term'})
 
     df['postings'] = df['postings'].apply(lambda x: ','.join(map(str, x)))
-
-
-    # convert dataframe to list of tuples
-    records = list(df.to_records(index=False))
-    str_records = [str(x) for x in records]
-    insert_vals = ",".join(str_records)
-
-    print(insert_vals)
 
     db = get_db()
     db.execute(
@@ -120,4 +150,4 @@ def parse():
         """
     )
     db.commit()
-'''
+    '''
